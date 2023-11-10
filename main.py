@@ -45,9 +45,23 @@ def sort_by_deadline():
 
 # 태스크를 완료로 표시하기 위한 기능.
 def complete_task():
-    status = int(input("완료할 Task를 선택\n"))
-    tasks[status][2] = True
+    global tasks
+    if not tasks:
+        print("할 일이 없음")
+        return
 
+    try:
+        status = int(input("완료할 Task의 번호를 선택\n"))
+        if 0 <= status < len(tasks):
+            if not tasks[status][2]:
+                tasks[status] = (tasks[status][0], tasks[status][1], True, tasks[status][3])
+                print("Task가 완료로 표시됨")
+            else:
+                print("이미 완료된 Task")
+        else:
+            print("유효한 번호가 아님")
+    except ValueError:
+        print("유효한 숫자를 입력")
 
 # 시작
 while True:
