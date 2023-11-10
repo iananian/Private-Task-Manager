@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
 
-# Create and initialize the list to store tasks
+# 태스크를 저장하기 위한 리스트를 제작한다. / Create and initialize the list to store tasks.
 tasks = []
 
-# Function to add a task
+# 태스크를 추가하기 위한 기능. / Function to add a task.
 def add_task():
     task = task_entry.get()
     deadline = deadline_entry.get()
@@ -16,14 +16,14 @@ def add_task():
     else:
         messagebox.showwarning("Warning", "Please enter a task.")
 
-# Function to list all tasks
+# 모든 태스크를 보여주기 위한 기능. / Function to list all tasks.
 def list_tasks():
     task_list.delete(0, tk.END)
     for i, (task, deadline, completed) in enumerate(tasks, start=1):
         task_status = "✓" if completed else " "
         task_list.insert(tk.END, f"{i}. {task} (Deadline: {deadline}) [{task_status}]")
 
-# Function to mark a task as completed
+# 태스크를 완료로 표시하기 위한 기능. / Function to mark a task as completed.
 def complete_task():
     selected_task = task_list.curselection()
     if selected_task:
@@ -32,16 +32,16 @@ def complete_task():
         tasks[task_index] = (tasks[task_index][0], tasks[task_index][1], True)
         list_tasks()
 
-# Function to sort tasks by deadline
+# 데드라인순으로 태스크를 정렬하기 위한 기능. / Function to sort tasks by deadline.
 def sort_by_deadline():
     tasks.sort(key=lambda x: x[1])
     list_tasks()
 
-# Create a Tkinter window
+# GUI 윈도우를 열음. / Create a Tkinter window.
 window = tk.Tk()
 window.title("Task Manager")
 
-# Create and configure GUI elements
+# GUI 요소들을 만듦. / Create and configure GUI elements.
 task_label = tk.Label(window, text="Task:")
 task_entry = tk.Entry(window)
 deadline_label = tk.Label(window, text="Deadline:")
@@ -52,7 +52,7 @@ complete_button = tk.Button(window, text="Complete Task", command=complete_task)
 sort_button = tk.Button(window, text="Sort by Deadline", command=sort_by_deadline)
 task_list = tk.Listbox(window)
 
-# Place GUI elements on the window
+# GUI 요소들을 배치함. / Place GUI elements on the window.
 task_label.pack()
 task_entry.pack()
 deadline_label.pack()
@@ -63,5 +63,5 @@ complete_button.pack()
 sort_button.pack()
 task_list.pack()
 
-# Run the Tkinter main loop
+# GUI를 실행함. / Run the Tkinter main loop.
 window.mainloop()
