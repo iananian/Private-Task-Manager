@@ -1,5 +1,5 @@
-import tkinter as tk
-from tkinter import messagebox
+# import tkinter as tk
+# from tkinter import messagebox
 
 
 # task를 저장하기 위한 list를 제작한다.
