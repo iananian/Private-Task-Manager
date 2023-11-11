@@ -6,9 +6,17 @@
 
 > 개인적으로 필수적이라고 생각하는 기능들로 구성하였습니다.
 
-* tasks 리스트에 append 를 통해서 (Task 제목, Deadline (년, 월, 일), Complete 여부, 등록 순서) 를 저장
-* ~~Task 제목에 따라~~, Deadline 에 따라, 등록 순서에 따라 tasks를 리스트업
-* complete 된 tasks 를 삭제
+### Done
+* local에 tasks를 저장, 불러오기
+* tasks리스트에 append를 통해서 (Task제목, Deadline(년, 월, 일), Complete여부, 등록 순서)를 저장
+* ~~Task제목에 따라~~, Deadline에 따라, 등록 순서에 따라 tasks를 리스트업
+* complete된 tasks를 삭제
+    * 숫자를 작성해서 tasks를 complete하는 기능
+
+### Developing Now
+* complete된 tasks를 삭제
+    * GUI를 통해 마우스로 선택한 tasks를 complete하는 기능
+* ***GUI 구현***
 
 ## Note
 
