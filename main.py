@@ -1,6 +1,3 @@
-# # GUI이용 위해 thinter모듈 이용.
-# import tkinter as tk
-# from tkinter import messagebox
 # pickle모듈을 이용해 데이터를 로컬로 저장. / web서비스시 서버에 저장하도록 수정 가능.
 import pickle
 
@@ -111,6 +108,12 @@ while True:
 save_tasks()
 
 
+
+
+
+# # GUI이용 위해 thinter모듈 이용.
+# import tkinter as tk
+# from tkinter import messagebox
 
 # # GUI 윈도우를 열음.
 # window = tk.Tk()
