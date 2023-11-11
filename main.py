@@ -4,11 +4,13 @@ import pickle
 # 파일에 저장되는 tasks 데이터를 담을 파일 이름.
 TASKS_FILE = "tasks_data.pkl"
 
-# task를 저장하기 위한 list를 제작한다.
+# task를 저장하기 위한 list를 제작.
+# task의 양식은 다음 과 같음. (task, deadline, status, order)
 tasks = []
 
 # 파일에서 tasks를 불러오기 위한 기능.
 def load_tasks():
+    # 함수 내에서 전역 변수를 수정하기 위한 작업.
     global tasks
     try:
         with open(TASKS_FILE, 'rb') as file:
@@ -52,7 +54,7 @@ def sort_by_order():
 
 # 데드라인순으로 태스크를 정렬하기 위한 기능.
 def sort_by_deadline():
-        # order값을 기준으로 tasks를 정렬
+    # order값을 기준으로 tasks를 정렬
     tasks_sort_deadline = sorted(tasks, key=lambda x: (x[1][0], x[1][1], x[1][2]))
 
     # tasks를 리스트업
