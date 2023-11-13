@@ -30,7 +30,6 @@ def add_task():
     
     # 요소들을 input받음.
     task = input("Task의 내용을 작성\n")
-    order = len(tasks)
     try:
         deadline[0], deadline[1], deadline[2] = input("Task의 Deadline을 작성 / 양식 : '년 월 일'\n").split(" ")
     except ValueError:
@@ -39,7 +38,7 @@ def add_task():
     # input받은 요소들을 tasks리스트에 저장
     # status의 기본값은 false
     if task:
-        tasks.append((task, deadline, False, order))
+        tasks.append((task, deadline, False))
     else:
         print("경고, Task를 작성")
 
@@ -49,7 +48,7 @@ def sort_by_order():
     # tasks를 리스트업
     for i in tasks:
         if i[2] == False:
-            print("Task: ", i[0], "Deadline: ", i[1], "Status: ", i[2])
+            print("Task:", i[0], "Deadline:", i[1], "Status:", i[2])
 
 
 # 데드라인순으로 태스크를 정렬하기 위한 기능.
@@ -60,7 +59,7 @@ def sort_by_deadline():
     # tasks를 리스트업
     for i in tasks_sort_deadline:
         if i[2] == False:
-            print("Task: ", i[0], "Deadline: ", i[1], "Status: ", i[2])
+            print("Task:", i[0], "Deadline:", i[1], "Status:", i[2])
 
 
 # 태스크를 complete로 표시하기 위한 기능.
@@ -76,9 +75,9 @@ def complete_task():
     # 예외 경우가 발생하면 처리하기 위해 try를 이용.
     try:
         status = int(input("완료할 Task의 번호를 선택\n"))
-        if 0 <= status < len(tasks):
+        if status >= 0 and status <= len(tasks):
             if not tasks[status][2]:
-                tasks[status] = (tasks[status][0], tasks[status][1], True, tasks[status][3])
+                del tasks[status]
                 print("Task가 완료로 표시됨")
             else:
                 print("이미 완료된 Task")
@@ -108,40 +107,3 @@ while True:
 
 # 끝나고 나서
 save_tasks()
-
-
-
-
-
-# # GUI이용 위해 thinter모듈 이용.
-# import tkinter as tk
-# from tkinter import messagebox
-
-# # GUI 윈도우를 열음.
-# window = tk.Tk()
-# window.title("Task Manager")
-
-# # GUI 요소들을 만듦.
-# task_label = tk.Label(window, text="Task:")
-# task_entry = tk.Entry(window)
-# deadline_label = tk.Label(window, text="Deadline:")
-# deadline_entry = tk.Entry(window)
-# add_button = tk.Button(window, text="Add Task", command=add_task)
-# list_button = tk.Button(window, text="List Tasks", command=list_tasks)
-# complete_button = tk.Button(window, text="Complete Task", command=complete_task)
-# sort_button = tk.Button(window, text="Sort by Deadline", command=sort_by_deadline)
-# task_list = tk.Listbox(window)
-
-# # GUI 요소들을 배치함.
-# task_label.pack()
-# task_entry.pack()
-# deadline_label.pack()
-# deadline_entry.pack()
-# add_button.pack()
-# list_button.pack()
-# complete_button.pack()
-# sort_button.pack()
-# task_list.pack()
-
-# # GUI를 실행함.
-# window.mainloop()
