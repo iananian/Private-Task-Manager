@@ -137,8 +137,12 @@ task_year.place(x=197,y=75)
 task_year.set("2023")
 
 
-label_date=tkinter.Label(window, text="년              월              일")
-label_date.place(x=255,y=75)
+label_year=tkinter.Label(window, text="년")
+label_year.place(x=250,y=75)
+label_month=tkinter.Label(window, text="년")
+label_month.place(x=341,y=75)
+label_day=tkinter.Label(window, text="년")
+label_day.place(x=425,y=75)
 
 
 month_values=[str(i) for i in range(1, 13)]
@@ -153,8 +157,8 @@ task_date.place(x=382,y=75)
 task_date.set("1")
 
 
-button_add = tkinter.Button(window, text="Task 추가",width=9, command=add_task)
-button_add.place(x=277,y=106)
+button_add = tkinter.Button(window, text="Add Task",width=9, command=add_task)
+button_add.place(x=250,y=106)
 
 
 button_save=tkinter.Button(window,text="Task Save",width=9, command=save_tasks)
