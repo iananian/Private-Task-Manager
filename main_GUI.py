@@ -6,6 +6,7 @@ import pickle
 
 
 # 파일 이름 설정
+# 세이브 파일을 주고 받으려면 메인 폴더에 아래 만든 파일을 넣고 빼면 됨 XD
 TASKS_FILE = "tasks_data.pkl"
 
 
@@ -13,14 +14,18 @@ TASKS_FILE = "tasks_data.pkl"
 window=tkinter.Tk()
 
 
+
 window.title("Task Manager")
-window.geometry("640x400")
+# 화면 사이즈를 황금비에 맞게 제작함
+window.geometry("672x400")
+# 태스크 매니저의 특징에 맞게 많은 테스크를 수욯ㅇ할 수 있도록
+# 아래로는 사이즈를 늘릴 수 있게 만듦
 window.resizable(False, True)
 
 window["bg"] = "#54566e"
 
 
-# task 저장을 위한 배열
+# task 저장을 위한 리스트를 제작
 tasks = []
 
 
@@ -81,7 +86,7 @@ def sort_order():
     list_task.delete(0,list_task.size()-1)
 
 
-    # tasks 배열속 요소를 대입 (tasks는 원래 추가된 순)
+    # tasks 배열속 요소를 대입 (처음 만든 리스트 tasks 는 원래 추가된 순으로 작성됨)
     for i in range(0,len(tasks)):
         list_task.insert(i,"Task "+str(i+1)+" : "+tasks[i][0]+" || DeadLine : "+str(tasks[i][1])+"년 " +str(tasks[i][2])+"월 "+str(tasks[i][3])+"일")
 
@@ -94,10 +99,8 @@ def sort_deadline():
    
     list_task.delete(0,list_task.size()-1)
 
-
     # tasks배열을 deadline순으로 정렬한 새로운 배열 생성
     deadline_tasks=sorted(tasks,key=lambda x: (x[1], x[2], x[3]))
-
 
     # 배열 대입
     for i in range(0,len(tasks)):
@@ -112,11 +115,11 @@ def task_complete():
     if (selected_task_index==()):
         print("task를 선택하세요!!")
         return
-   
+    
     # 그 위치의 listbox를 삭제
     list_task.delete(selected_task_index[0],selected_task_index[0])
-       
-     # task를 기록한 배열에서 삭제
+    
+    # task를 기록한 배열에서 삭제
     del tasks[selected_task_index[0]]
 
 # GUI 배치
