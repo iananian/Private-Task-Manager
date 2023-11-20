@@ -1,9 +1,6 @@
 # pickle모듈을 이용해 데이터를 로컬로 저장. / web서비스시 서버에 저장하도록 수정 가능.
 import pickle
 
-
-
-
 # 파일에 저장되는 tasks 데이터를 담을 파일 이름.
 TASKS_FILE = "tasks_data.pkl"
 

@@ -17,6 +17,8 @@ window.title("Task Manager")
 window.geometry("640x400")
 window.resizable(False, True)
 
+window["bg"] = "#54566e"
+
 
 # task 저장을 위한 배열
 tasks = []
@@ -117,9 +119,8 @@ def task_complete():
      # task를 기록한 배열에서 삭제
     del tasks[selected_task_index[0]]
 
-
 # GUI 배치
-label_task=tkinter.Label(window, text="Task 내용")
+label_task=tkinter.Label(window, text="Task 내용", bg="#9da2e3")
 label_task.pack()
 
 
@@ -127,7 +128,7 @@ entry_task = tk.Entry(window, width=30)
 entry_task.pack()
 
 
-label_deadline = tk.Label(window, text="Deadline (년 월 일)")
+label_deadline = tk.Label(window, text="Deadline (년 월 일)", bg="#9da2e3")
 label_deadline.pack()
 
 
@@ -137,11 +138,11 @@ task_year.place(x=197,y=75)
 task_year.set("2023")
 
 
-label_year=tkinter.Label(window, text="년")
+label_year=tkinter.Label(window, text="년", bg="#9da2e3")
 label_year.place(x=250,y=75)
-label_month=tkinter.Label(window, text="년")
+label_month=tkinter.Label(window, text="월", bg="#9da2e3")
 label_month.place(x=341,y=75)
-label_day=tkinter.Label(window, text="년")
+label_day=tkinter.Label(window, text="일", bg="#9da2e3")
 label_day.place(x=425,y=75)
 
 
@@ -157,32 +158,36 @@ task_date.place(x=382,y=75)
 task_date.set("1")
 
 
-button_add = tkinter.Button(window, text="Add Task",width=9, command=add_task)
+button_add = tkinter.Button(window, text="Add Task",width=9, command=add_task, bd=0, bg="#ffcfff")
 button_add.place(x=250,y=106)
 
 
-button_save=tkinter.Button(window,text="Task Save",width=9, command=save_tasks)
+button_save=tkinter.Button(window,text="Task Save",width=9, command=save_tasks, bd=0, bg="#ffcfff")
 button_save.place(x=540,y=150)
 
 
-button_load=tkinter.Button(window,text="Task Load",width=9, command=load_tasks)
+button_load=tkinter.Button(window,text="Task Load",width=9, command=load_tasks, bd=0, bg="#ffcfff")
 button_load.place(x=540,y=190)
 
 
-list_task = tkinter.Listbox(selectmode='extended',width=50, height=0)
+list_task = tkinter.Listbox(selectmode='extended',width=50, height=0, bd=0)
 list_task.place(x=118,y=146)
 
 
-button_sort_order = tkinter.Button(window,text="Sort Order",width=11, command=sort_order)
+button_sort_order = tkinter.Button(window,text="Sort Order",width=11, command=sort_order, bd=0, bg="#ffcfff")
 button_sort_order.place(x=370,y=106)
 
 
-button_sort_deadline = tkinter.Button(window, text="Sort DeadLine",width=11, command=sort_deadline)
+button_sort_deadline = tkinter.Button(window, text="Sort DeadLine",width=11, command=sort_deadline, bd=0, bg="#ffcfff")
 button_sort_deadline.place(x=480,y=106)
 
 
-button_complete = tkinter.Button(window, text="Task Complete",width=11, command=task_complete)
+button_complete = tkinter.Button(window, text="Task Complete",width=11, command=task_complete, bd=0, bg="#ffcfff")
 button_complete.place(x=140,y=106)
 
 
+load_tasks()
+
 window.mainloop()
+
+save_tasks()
