@@ -18,7 +18,9 @@
     * 아름다운 GUI 장식
 
 ### Developing Now
-
+* GUI 색깔 요소 수정
+* .exe파일로 포팅
+* GUI 요소 아름답게 정렬
 
 
 ## Note
