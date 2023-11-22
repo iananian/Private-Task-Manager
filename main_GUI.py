@@ -2,6 +2,7 @@
 import tkinter
 import tkinter as tk
 import tkinter.ttk
+import tkinter.messagebox
 import pickle
 
 
@@ -16,13 +17,12 @@ window=tkinter.Tk()
 
 
 window.title("Task Manager")
-# 화면 사이즈를 황금비에 맞게 제작함
-window.geometry("672x400")
-# 태스크 매니저의 특징에 맞게 많은 테스크를 수욯ㅇ할 수 있도록
+window.geometry("560x720")
+# 태스크 매니저의 특징에 맞게 많은 테스크를 수용할 수 있도록
 # 아래로는 사이즈를 늘릴 수 있게 만듦
 window.resizable(False, True)
 
-window["bg"] = "#54566e"
+window["bg"] = "#444444"
 
 
 # task 저장을 위한 리스트를 제작
@@ -49,7 +49,7 @@ def load_tasks():
             list_task.insert(i,"Task "+str(i+1)+" : "+tasks[i][0]+" || DeadLine : "+str(tasks[i][1])+"년 " +str(tasks[i][2])+"월 "+str(tasks[i][3])+"일")
     # 파일이 없을시 출력
     except FileNotFoundError:
-        print("save된 file을 찾을 수 없음.")
+        tkinter.messagebox.showerror("error", "save된 file을 찾을 수 없음.")
 
 
 # 파일에 tasks 배열 저장
@@ -64,7 +64,7 @@ def add_task():
     global tasks
     # task 제목이 없다면 작성 지시
     if (entry_task.get()==""):    
-        print("Task를 입력하세요!!")
+        tkinter.messagebox.showerror("error", "task가 입력되지 않음.")
         return
    
     # listbox에 task 삽입
@@ -79,7 +79,7 @@ def add_task():
 def sort_order():
     # task가 없을시 종료
     if (len(tasks)==0):
-        print("Task를 입력하세요!!")
+        tkinter.messagebox.showerror("error", "Task를 작성 후 시도.")
         return
    
     # 현재 listbox 삭제
@@ -94,7 +94,7 @@ def sort_order():
 # 마감기한순 정렬
 def sort_deadline():
     if (len(tasks)==0):
-        print("Task를 입력하세요!!")
+        tkinter.messagebox.showerror("error", "Task를 작성 후 시도.")
         return
    
     list_task.delete(0,list_task.size()-1)
@@ -113,7 +113,7 @@ def task_complete():
     selected_task_index=list_task.curselection()
     # 선택 없을시 종료
     if (selected_task_index==()):
-        print("task를 선택하세요!!")
+        tkinter.messagebox.showerror("error", "task를 선택 후 시도.")
         return
     
     # 그 위치의 listbox를 삭제
@@ -123,70 +123,80 @@ def task_complete():
     del tasks[selected_task_index[0]]
 
 # GUI 배치
-label_task=tkinter.Label(window, text="Task 내용", bg="#9da2e3")
+
+task_y_pos = 40
+label_task=tkinter.Label(window, text="Task : ", bg="#444444", fg = "#ffffff")
 label_task.pack()
+label_task.place(x=40,y=task_y_pos)
 
 
 entry_task = tk.Entry(window, width=30)
 entry_task.pack()
+entry_task.place(x=100,y=task_y_pos)
 
 
-label_deadline = tk.Label(window, text="Deadline (년 월 일)", bg="#9da2e3")
+deadline_y_pos = 80
+
+label_deadline = tk.Label(window, text="Deadline : ", bg="#444444", fg = "#ffffff")
 label_deadline.pack()
+label_deadline.place(x=40,y=deadline_y_pos)
 
 
+from datetime import datetime
+
+today_year = datetime.today().year
 year_values=[str(i) for i in range(2023, 2034)]
 task_year=tkinter.ttk.Combobox(window,state="readonly",width=4,height=15, values=year_values)
-task_year.place(x=197,y=75)
-task_year.set("2023")
+task_year.place(x=100,y=deadline_y_pos)
+task_year.set(today_year)
 
 
-label_year=tkinter.Label(window, text="년", bg="#9da2e3")
-label_year.place(x=250,y=75)
-label_month=tkinter.Label(window, text="월", bg="#9da2e3")
-label_month.place(x=341,y=75)
-label_day=tkinter.Label(window, text="일", bg="#9da2e3")
-label_day.place(x=425,y=75)
+label_year=tkinter.Label(window, text="년", bg="#444444", fg = "#ffffff")
+label_year.place(x=140,y=deadline_y_pos)
+label_month=tkinter.Label(window, text="월", bg="#444444", fg = "#ffffff")
+label_month.place(x=220,y=deadline_y_pos)
+label_day=tkinter.Label(window, text="일", bg="#444444", fg = "#ffffff")
+label_day.place(x=300,y=deadline_y_pos)
 
-
+today_month = datetime.today().month
 month_values=[str(i) for i in range(1, 13)]
 task_month=tkinter.ttk.Combobox(window,state="readonly",width=2,height=15, values=month_values)
-task_month.place(x=298,y=75)
-task_month.set("1")
+task_month.place(x=180,y=deadline_y_pos)
+task_month.set(today_month)
 
-
+today_date = datetime.today().day
 date_values=[str(i) for i in range(1,32)]
 task_date=tkinter.ttk.Combobox(window,state="readonly",width=2,height=15, values=date_values)
-task_date.place(x=382,y=75)
-task_date.set("1")
+task_date.place(x=260,y=deadline_y_pos)
+task_date.set(today_date)
+
+config_x_pos = 430
+button_add = tkinter.Button(window, text="Add Task",width=9, command=add_task, bd=0, bg="#ffffff")
+button_add.place(x=340,y=40)
 
 
-button_add = tkinter.Button(window, text="Add Task",width=9, command=add_task, bd=0, bg="#ffcfff")
-button_add.place(x=250,y=106)
+button_save=tkinter.Button(window,text="Task Save",width=11, command=save_tasks, bd=0, bg="#ffffff")
+button_save.place(x=config_x_pos,y=40)
 
 
-button_save=tkinter.Button(window,text="Task Save",width=9, command=save_tasks, bd=0, bg="#ffcfff")
-button_save.place(x=540,y=150)
-
-
-button_load=tkinter.Button(window,text="Task Load",width=9, command=load_tasks, bd=0, bg="#ffcfff")
-button_load.place(x=540,y=190)
+button_load=tkinter.Button(window,text="Task Load",width=11, command=load_tasks, bd=0, bg="#ffffff")
+button_load.place(x=config_x_pos,y=80)
 
 
 list_task = tkinter.Listbox(selectmode='extended',width=50, height=0, bd=0)
-list_task.place(x=118,y=146)
+list_task.place(x=40,y=120)
 
 
-button_sort_order = tkinter.Button(window,text="Sort Order",width=11, command=sort_order, bd=0, bg="#ffcfff")
-button_sort_order.place(x=370,y=106)
+button_sort_order = tkinter.Button(window,text="Sort Order",width=11, command=sort_order, bd=0, bg="#ffffff")
+button_sort_order.place(x=config_x_pos,y=120)
 
 
-button_sort_deadline = tkinter.Button(window, text="Sort DeadLine",width=11, command=sort_deadline, bd=0, bg="#ffcfff")
-button_sort_deadline.place(x=480,y=106)
+button_sort_deadline = tkinter.Button(window, text="Sort DeadLine",width=11, command=sort_deadline, bd=0, bg="#ffffff")
+button_sort_deadline.place(x=config_x_pos,y=160)
 
 
-button_complete = tkinter.Button(window, text="Task Complete",width=11, command=task_complete, bd=0, bg="#ffcfff")
-button_complete.place(x=140,y=106)
+button_complete = tkinter.Button(window, text="Task Complete",width=11, command=task_complete, bd=0, bg="#ffffff")
+button_complete.place(x=config_x_pos,y=240)
 
 
 load_tasks()
